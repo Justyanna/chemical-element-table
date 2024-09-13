@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Edit Chemical Element</h2>
+
+<mat-dialog-content class="p-5">
+  <form [formGroup]="elementForm" class="flex flex-col gap-3">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput placeholder="Element name">
+      @if (elementForm.get('name')?.invalid) {
+      <mat-error>Name is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Position</mat-label>
+      <input formControlName="position" matInput placeholder="Position in periodic table" type="number">
+      @if (elementForm.get('position')?.invalid) {
+      <mat-error>Valid position is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Weight</mat-label>
+      <input formControlName="weight" matInput placeholder="Atomic weight" type="number">
+      @if (elementForm.get('weight')?.invalid) {
+      <mat-error>Valid weight is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Symbol</mat-label>
+      <input formControlName="symbol" matInput placeholder="Element symbol">
+      @if (elementForm.get('symbol')?.invalid) {
+      <mat-error>Symbol (max 2 letters) is required</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button (click)="onSave()" [disabled]="elementForm.invalid" mat-button>Save</button>
+</mat-dialog-actions>
