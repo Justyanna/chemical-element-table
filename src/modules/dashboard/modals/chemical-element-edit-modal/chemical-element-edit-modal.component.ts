@@ -50,7 +50,7 @@ export class ChemicalElementEditModalComponent implements OnInit {
   });
 
   constructor(public dialogRef: MatDialogRef<ChemicalElementEditModalComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { element: ChemicalElement }) {
+              @Inject(MAT_DIALOG_DATA) public data: { element: ChemicalElement}) {
   }
 
   ngOnInit(): void {

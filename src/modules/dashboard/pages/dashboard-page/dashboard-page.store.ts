@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ComponentStore} from '@ngrx/component-store';
-import {exhaustMap, finalize, Observable, tap} from 'rxjs';
-import {ChemicalElementsService} from "../../services/chemical-elements.service";
-import {ChemicalElement} from "../../models/chemical-elements.model";
-import {tapResponse} from "@ngrx/operators";
+import { Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { exhaustMap, finalize, Observable, tap } from 'rxjs';
+import { ChemicalElementsService } from "../../services/chemical-elements.service";
+import { ChemicalElement } from "../../models/chemical-elements.model";
+import { tapResponse } from "@ngrx/operators";
 
 export interface DashboardState {
     chemicalElements: ChemicalElement[];
@@ -34,15 +34,15 @@ export class DashboardPageStore extends ComponentStore<DashboardState> {
     );
 
     readonly editProduct$ = this.effect(
-    (element$: Observable<ChemicalElement>) => element$.pipe(
-        exhaustMap((element: ChemicalElement) => this.chemicalElementsService.updateElement(element).pipe(
-            tapResponse(() => {
-               console.info(`Successfully edit of product ${element.position} ${element.name} ${element.symbol} ${element.weight}`)
-            }, (error) => console.error(error)),
-            finalize(() => {
-                this.loadChemicalElements$();
-            })
-        )))
+        (params$: Observable<{ element: ChemicalElement, index: number }>) => params$.pipe(
+            exhaustMap((params: { element: ChemicalElement, index: number }) => this.chemicalElementsService.updateElement(params.element, params.index).pipe(
+                tapResponse(() => {
+                    console.info(`Successfully edit of product ${params.element.position} ${params.element.name} ${params.element.symbol} ${params.element.weight}`)
+                }, (error) => console.error(error)),
+                finalize(() => {
+                    this.loadChemicalElements$();
+                })
+            )))
     );
 
     private readonly setLoading = this.updater((state, loading: boolean) => ({

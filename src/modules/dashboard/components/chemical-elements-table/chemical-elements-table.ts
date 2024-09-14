@@ -18,10 +18,14 @@ export class ChemicalElementsTable implements OnInit {
 
   @Input() displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'edit'];
   @Input() set chemicalElements(chemicalElements: ChemicalElement[]) {
-    this.dataSource = new MatTableDataSource(chemicalElements);
+    if (this.dataSource) {
+      this.dataSource.data = chemicalElements;
+    } else {
+      this.dataSource = new MatTableDataSource(chemicalElements);
+    }
   }
 
-  @Output() editElementEvent = new EventEmitter<ChemicalElement>();
+  @Output() editElementEvent = new EventEmitter<{element: ChemicalElement, index: number}>();
 
   dataSource: MatTableDataSource<ChemicalElement>;
   private filterSubject = new Subject<string>();
@@ -42,7 +46,7 @@ export class ChemicalElementsTable implements OnInit {
     };
   }
 
-  editElement(element: ChemicalElement): void {
-    this.editElementEvent.emit(element);
+  editElement(element: ChemicalElement, index: number): void {
+    this.editElementEvent.emit({element, index });
   }
 }

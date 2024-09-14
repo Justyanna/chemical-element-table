@@ -1,3 +1,7 @@
 @if (dashboardState$ | async; as state) {
-  <chemical-elements-table [chemicalElements]="state.chemicalElements" (editElementEvent)="onEditElement($event)"></chemical-elements-table>
+  @if (state.loading) {
+    <span>Loading ...</span>
+  }@else{
+    <chemical-elements-table [chemicalElements]="state.chemicalElements" (editElementEvent)="onEditElement($event)"></chemical-elements-table>
+  }
 }
