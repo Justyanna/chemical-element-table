@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { combineLatest, debounceTime, distinctUntilChanged, first, map, startWith, Subject, switchMap, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { ChemicalElementsTable } from '../../components/chemical-elements-table/chemical-elements-table.component';
 import { ChemicalElement } from '../../models/chemical-elements.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ChemicalElementEditModalComponent } from '../../modals/chemical-element-edit-modal/chemical-element-edit-modal.component';
 import { ChemicalElementFilterComponent } from '../../components/chemical-elements-filter/chemical-elements-filter.component';
 import { ChemicalElementsService } from '../../services/chemical-elements.service';
 import { rxState } from '@rx-angular/state';
-import { filterChemicalElements } from 'src/utils/filter-chemical-elemnts.utils';
+import { filterChemicalElements } from '../../../../utils/filter-chemical-elemnts.utils';
 import { takeUntil } from 'rxjs/operators';
+import { ChemicalElementsTableComponent } from '../../components/chemical-elements-table/chemical-elements-table.component';
 
 export interface DashboardState {
   chemicalElements: ChemicalElement[];
@@ -30,7 +30,7 @@ const INITIAL_STATE: DashboardState = {
   standalone: true,
   imports: [
     AsyncPipe,
-    ChemicalElementsTable,
+    ChemicalElementsTableComponent,
     ChemicalElementEditModalComponent,
     ChemicalElementFilterComponent,
   ],

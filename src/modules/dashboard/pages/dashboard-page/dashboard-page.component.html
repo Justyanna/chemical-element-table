@@ -1,7 +1,0 @@
-@if (loading()) {
-  <span>Loading ...</span>
-}@else{
-  <app-chemical-elements-filter (filter)="chemicalElementsFilter$.next($event)"/>
-  <chemical-elements-table [chemicalElements]="filteredChemicalElements()" (editElementEvent)="editChemicalElement$.next($event)"></chemical-elements-table>
-}
-

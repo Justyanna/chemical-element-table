@@ -1,20 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChemicalElement } from "../../models/chemical-elements.model";
-import { debounceTime, Subject } from "rxjs";
 import { MatFabButton, MatIconButton, MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 
 
 @Component({
-  selector: 'chemical-elements-table',
+  selector: 'app-chemical-elements-table',
   templateUrl: 'chemical-elements-table.component.html',
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatFabButton, MatMiniFabButton, MatIconButton, MatIcon],
 })
-export class ChemicalElementsTable {
+export class ChemicalElementsTableComponent {
+
 
   @Input() displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'edit'];
   @Input() set chemicalElements(chemicalElements: ChemicalElement[]) {
@@ -28,7 +28,7 @@ export class ChemicalElementsTable {
   @Output() editElementEvent = new EventEmitter<ChemicalElement>();
   @Output() filter = new EventEmitter<string>;
 
-  dataSource: MatTableDataSource<ChemicalElement>;
+  dataSource: MatTableDataSource<ChemicalElement> = new MatTableDataSource;
 
   editElement(element: ChemicalElement): void {
     this.editElementEvent.emit(element);

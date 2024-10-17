@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ChemicalElement } from "../models/chemical-elements.model";
 
 const CHEMICAL_ELEMENTS_URL = 'api/elements';
@@ -19,7 +19,7 @@ export class ChemicalElementsService {
         return this.http.get<ChemicalElement[]>(CHEMICAL_ELEMENTS_URL);
     }
 
-    updateChemicalElement(element: ChemicalElement): Observable<any> {
+    updateChemicalElement(element: ChemicalElement): Observable<unknown> {
         return this.http.put(CHEMICAL_ELEMENTS_URL + '/' + element.position, element, this.httpOptions);
     }
 

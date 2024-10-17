@@ -1,4 +1,4 @@
-import { ChemicalElement } from "src/modules/dashboard/models/chemical-elements.model";
+import { ChemicalElement } from "../modules/dashboard/models/chemical-elements.model";
 
 export function filterChemicalElements(chemicalElements: ChemicalElement[], filter: string): ChemicalElement[] {
     return chemicalElements.filter((chemicalElement: ChemicalElement) =>
